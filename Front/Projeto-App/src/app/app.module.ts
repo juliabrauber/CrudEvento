@@ -8,18 +8,24 @@ import { AppComponent } from './app.component';
 
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     PalestrantesComponent,
-    EventosComponent
-  ],
+    EventosComponent,
+    NavComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CollapseModule.forRoot(),
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]
