@@ -8,9 +8,7 @@ import { AppComponent } from './app.component';
 
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { EventosComponent } from './eventos/eventos.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NavComponent } from './nav/nav.component';
-
 @NgModule({
   declarations: [	
     AppComponent,
@@ -23,7 +21,6 @@ import { NavComponent } from './nav/nav.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot(),
   ],
   exports: [
   ],
