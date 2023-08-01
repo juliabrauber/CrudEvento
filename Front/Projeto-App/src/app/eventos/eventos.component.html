@@ -3,7 +3,36 @@
 <hr>
 
 <form action="" class="form-inline">
-    <form-group class="mb-2">
-        
-    </form-group>
+    <div class="form-group mb-2">
+        <input type="text" class="form-control mr-2" placeholder="buscar">
+        <br />
+        <button class="btn btn-outline-success">Buscar</button>
+    </div>
 </form>
+<table class="table table-striped">
+    <thead class="table-striped">
+        <tr>
+            <th>#</th>
+            <th>Imagem</th>
+            <th>Tema</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Qtd Pessoas</th>
+            <th>Lote</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let evento of eventos">
+            <td>{{ evento.projetoId }}</td>
+            <td> 
+                <img src="/assets/{{evento.imagemURL}}" alt="" width="100px">
+            </td>
+            <td>{{ evento.tema }}</td>
+            <td>{{ evento.local }}</td>
+            <td>{{ evento.dataEvento }}</td>
+            <td>{{ evento.qtdPessoas }}</td>
+            <td>{{ evento.lote }}</td>
+            <td>{{ evento.local }}</td>
+    </tbody>
+</table>
