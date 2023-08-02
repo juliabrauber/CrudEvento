@@ -3,17 +3,27 @@
 <hr>
 
 <form action="" class="form-inline">
-    <div class="form-group mb-2">
-        <input type="text" class="form-control mr-2" placeholder="buscar">
-        <br />
-        <button class="btn btn-outline-success">Buscar</button>
+    <div class="row">
+        <div class="col-10">
+            <input type="text" class="form-control mr-2" placeholder="buscar">
+            <br />
+        </div>
+        <div class="col-2"> 
+            <button class="btn btn-outline-success mlc-5">Buscar</button>
+        </div>
     </div>
+
 </form>
 <table class="table table-striped">
     <thead class="table-striped">
         <tr>
             <th>#</th>
-            <th>Imagem</th>
+            <th>
+                <button type="button" class="btn btn-outline-dark btn-sm"
+                (click)="alterarImagem()">
+                {{!exibirImagem ? 'Exibir': 'Ocultar'}}
+                </button>
+            </th>
             <th>Tema</th>
             <th>Local</th>
             <th>Data</th>
@@ -26,7 +36,10 @@
         <tr *ngFor="let evento of eventos">
             <td>{{ evento.projetoId }}</td>
             <td> 
-                <img src="/assets/{{evento.imagemURL}}" alt="" width="100px">
+                <img *ngIf="exibirImagem"
+                src="/assets/{{evento.imagemURL}}" 
+                [style.width.px]="larguraImagem"
+                [style.margin.px]="margemImagem">
             </td>
             <td>{{ evento.tema }}</td>
             <td>{{ evento.local }}</td>
