@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class EventosComponent implements OnInit {
 
   public eventos: any = [];
+  public eventosFiltrados: any = [];
+
   larguraImagem: number = 150;
   margemImagem: number = 2;
   exibirImagem: boolean = true;
@@ -19,12 +21,13 @@ return this._filtroLista;
 }
 public set filtroLista (value: string){
   this._filtroLista = value;
-  this.eventos= this.filtroLista ? this.filtrarEventos(this.filtroLista): this.eventos;
+  this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista): this.eventos;
 }
 filtrarEventos(filtrarPor: string) : any {
 filtrarPor = filtrarPor.toLocaleLowerCase();
 return this.eventos.filter(
-  ( evento:  any ) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+  ( evento:  any ) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 || 
+  evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
 );
 }
 
@@ -41,6 +44,7 @@ return this.eventos.filter(
     this.http.get('https://localhost:5001/api/projeto').subscribe(
       Response => {
         this.eventos = Response;
+        this.eventosFiltrados = Response;
         console.log('response', Response);
       }, 
       Error => console.log(Error),
