@@ -4,33 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProjetoFull.API.Data;
-using ProjetoFull.API.Models;
+using ProEventos.Persistence;
+using ProEventos.Domain;
 
-namespace ProjetoFull.API.Controllers
+namespace ProEventos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ProjetoController : ControllerBase
     {  
-        private readonly DataContext _context;
-        public ProjetoController(DataContext context )
+        private readonly ProEventosContext _context;
+        public ProjetoController(ProEventosContext context )
         {
             _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<Projeto> Get()
+        public IEnumerable<Evento> Get()
         {
 
-            return _context.Projetos;
+            return _context.Eventos;
 
         }
         [HttpGet("{id}")]
-        public IEnumerable<Projeto> GetById(int id)
+        public Evento GetById(int id)
         {
 
-            return _context.Projetos.Where(Projeto => Projeto.ProjetoId == id);
+            return _context.Eventos.FirstOrDefault(Evento => Evento.Id == id);
 
         }
         [HttpPost]
