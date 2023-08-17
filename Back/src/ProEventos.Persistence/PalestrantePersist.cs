@@ -44,7 +44,7 @@ namespace ProEventos.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Palestrante> GetPalestranteByIdAsync(int PalestranteId, bool includeEventos)
+        public async Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos)
         {
             IQueryable<Palestrante> query = _context.Palestrantes.Include(p => p.RedesSociais);
              if (includeEventos){
@@ -52,7 +52,7 @@ namespace ProEventos.Persistence
                 .ThenInclude(pe => pe.Evento);
             }
 
-            query = query.OrderBy(p => p.Id).Where(p => p.Id == PalestranteId);
+            query = query.OrderBy(p => p.Id).Where(p => p.Id == palestranteId);
 
             return await query.FirstOrDefaultAsync();
         }
