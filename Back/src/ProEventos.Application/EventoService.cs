@@ -19,14 +19,14 @@ namespace ProEventos.Application
         }
 
         // esse método, é público, ele retorna um evento, tem o nome de addEventos e parâmetro de evento
-        public async Task<Evento> AddEventos(Evento Model)
+        public async Task<Evento> AddEventos(Evento model)
         {
             try
             {
                  // adicionando o evento que esta vindo no parâmetro do método(evento - váriavél método)
-                _geralPersist.Add<Evento>(Model);
+                _geralPersist.Add<Evento>(model);
                 if(await _geralPersist.SaveChangesAsvnc()) {
-                    return await _eventoPersist.GetEventoByIdAsync(Model.Id, false);
+                    return await _eventoPersist.GetEventoByIdAsync(model.Id, false);
                 }
                 return null;
             }
@@ -37,18 +37,18 @@ namespace ProEventos.Application
             }
         }
 
-        public async Task<Evento> UpdateEvento(int eventoId, Evento Model)
+        public async Task<Evento> UpdateEvento(int eventoId, Evento model)
         {
             try
             {
                 var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false);
                 if (evento == null) return null;
 
-                Model.Id = evento.Id;
+                model.Id = evento.Id;
 
-                _geralPersist.Update(Model);
+                _geralPersist.Update(model);
                 if(await _geralPersist.SaveChangesAsvnc()) {
-                    return await _eventoPersist.GetEventoByIdAsync(Model.Id, false);
+                    return await _eventoPersist.GetEventoByIdAsync(model.Id, false);
                 }
                 return null;
             }

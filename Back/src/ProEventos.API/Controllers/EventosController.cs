@@ -14,11 +14,11 @@ namespace ProEventos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProjetoController : ControllerBase
+    public class EventosController : ControllerBase
     {  
         private readonly IEventoService _eventoService;
        
-        public ProjetoController(IEventoService eventoService)
+        public EventosController(IEventoService eventoService)
         {
             _eventoService = eventoService;  
         }
@@ -78,7 +78,7 @@ namespace ProEventos.API.Controllers
                 var evento = await _eventoService.AddEventos(model);
                 if (evento == null) return BadRequest ("Erro ao tentar adicionar eventos.");
 
-                return Ok (evento);
+                return Ok(evento);
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Evento model)
+        public async Task<IActionResult> Put(int id, [FromBody]Evento model)
         {
             try
             {
