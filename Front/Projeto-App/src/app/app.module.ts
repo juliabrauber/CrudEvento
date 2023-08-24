@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
+import { EventoService } from './services/evento.service';
 @NgModule({
   declarations: [	
     AppComponent,
@@ -28,7 +29,7 @@ import { NavComponent } from './nav/nav.component';
   ],
   exports: [
   ],
-  providers: [],
+  providers: [ EventoService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
