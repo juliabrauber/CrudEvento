@@ -22,7 +22,8 @@
             <th>
                 <button type="button" class="btn btn-outline-dark btn-sm"
                 (click)="alterarImagem()">
-                {{!exibirImagem ? 'Exibir': 'Ocultar'}}
+                <i class ="{{!exibirImagem ? 'fa fa-eye': 'fa fa-eye-slash'}}"></i>
+                {{!exibirImagem ? 'exibir': 'ocultar'}}
                 </button>
             </th>
             <th>#</th>
@@ -39,19 +40,23 @@
             <td> 
                 <img [collapse]="!exibirImagem"
                     [isAnimated]="true"
-                src="/assets/{{evento.imagemURL}}" 
+                src="../../assets/{{evento.imagemURL}}" 
                 [style.width.px]="larguraImagem"
                 [style.margin.px]="margemImagem">
             </td>
-            <td>{{ evento.projetoId }}</td>
+            <td>{{ evento.id }}</td>
             <td>{{ evento.tema }}</td>
             <td>{{ evento.local }}</td>
-            <td>{{ evento.dataEvento }}</td>
+            <td>{{ evento.dataEvento | DateFormatPipe}}</td>
             <td>{{ evento.qtdPessoas }}</td>
-            <td>{{ evento.lote }}</td>
+            <td>{{ evento.lotes[0].nome| uppercase}}</td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;">Editar</button>
-                <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+                <button type="button" class="btn btn-primary btn-sm" style="margin-right: 4px;" title="Editar" (click)="openModal(template)>
+                    <i class ="fas fa-pencil-alt"></i> <!-- Ícone de lápis para edição -->
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" title="Excluir" (click)="openModal(template)>
+                    <i class ="fas fa-trash"></i> <!-- Ícone de lixeira para exclusão -->
+                </button>
             </td>
         </tr>
     </tbody>
@@ -63,3 +68,13 @@
         </tr>
     </tfoot>
 </table>
+
+<!--{{eventos|json}} -->
+
+<ng-template #template>
+    <div class="modal-body text-center">
+      <p>Tem certeza que quer deletar este Evento?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+    </div>
+  </ng-template>
