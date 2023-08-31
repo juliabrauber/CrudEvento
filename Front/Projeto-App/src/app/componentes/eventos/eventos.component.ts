@@ -1,7 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { EventoService } from '../services/evento.service';
-import { Evento } from '../models/Evento';
+
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Evento } from 'src/app/models/Evento';
+import { EventoService } from 'src/app/services/evento.service';
 
 
 @Component({
@@ -35,41 +38,45 @@ return this.eventos.filter(
 );
 }
 
-  constructor(
-    private eventoService : EventoService,
-    private modalService: BsModalService
-    ) { }
+constructor(
+  private eventoService: EventoService,
+  private modalService: BsModalService,
+  private toastr: ToastrService,
+  private spinner: NgxSpinnerService,
+) { }
 
   public ngOnInit(): void {
     this.getEventos();
+    this.spinner.show();
   }
   public alterarImagem(): void {
     this.exibirImagem = !this.exibirImagem; 
   }
 
   public getEventos(): void {
-    const observer = {
-      next: (eventosResp: Evento[])=> {
+    this.eventoService.getEventos().subscribe({
+      next: (eventosResp: Evento[]) => {
         this.eventos = eventosResp;
         this.eventosFiltrados = this.eventos;
       },
       error: (error: any) => {
-        console.log(error)
+        this.spinner.hide();
+        this.toastr.error('Erro ao carregar os eventos.', 'Erro!');
       },
-      complete: () => {},
-    };
-    this.eventoService.getEventos().subscribe(observer);
+      complete: () => this.spinner.hide()
+    });
   }
-}
-
-openModal(template: TemplateRef<any>): void {
-  this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
-}
-
-confirm(): void {
-  this.modalRef?.hide()
-}
-
-decline(): void {
-  this.modalRef?.hide()
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+  confirm(): void {
+    this.modalRef?.hide();
+    this.toastr.success('O Evento foi deletado com sucesso.', 'Deletado!');
+    // Lógica para confirmar a ação (editar/excluir)
+  }
+  
+  decline(): void {
+    this.modalRef?.hide();
+    // Lógica para recusar a ação (editar/excluir)
+  }
 }

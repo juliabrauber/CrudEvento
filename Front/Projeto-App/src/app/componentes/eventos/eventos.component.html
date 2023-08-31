@@ -1,6 +1,4 @@
-
-<h2>Eventos</h2>
-<hr>
+<app-título> </app-título>
 
 <div action="" class="form-inline">
     <div class="row">
@@ -51,13 +49,14 @@
             <td>{{ evento.qtdPessoas }}</td>
             <td>{{ evento.lotes[0].nome| uppercase}}</td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm" style="margin-right: 4px;" title="Editar" (click)="openModal(template)>
-                    <i class ="fas fa-pencil-alt"></i> <!-- Ícone de lápis para edição -->
-                </button>
-                <button type="button" class="btn btn-danger btn-sm" title="Excluir" (click)="openModal(template)>
-                    <i class ="fas fa-trash"></i> <!-- Ícone de lixeira para exclusão -->
-                </button>
-            </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" style="margin-right: 4px;" title="Editar" (click)="openModal(template)">
+                        <i class="fas fa-pencil-alt"></i> <!-- Ícone de lápis para edição -->
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" title="Excluir" (click)="openModal(template)">
+                        <i class="fas fa-trash"></i> <!-- Ícone de lixeira para exclusão -->
+                    </button>
+                </td>
         </tr>
     </tbody>
     <tfoot *ngIf="!eventos?.length" >
