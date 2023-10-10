@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using ProEventos.Domain;
 
 namespace ProEventos.Domain
 {
+    // Nome da tabela no banco de dados, caso queira outro.[Table("EventosDetalhes")]
     public class Evento
     {
         public int Id { get; set; }
