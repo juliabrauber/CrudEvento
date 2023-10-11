@@ -13,11 +13,18 @@ export class EventoDetalheComponent implements OnInit {
   get f(): any{
     return this.form.controls;
   }
+  get bsConfig(): any{
+    return{ adaptivePosition: true, 
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+     containerClass: 'theme-default',
+    showWeekNumbers: false }
+  }
 
   constructor( private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.validation();
+
   }
   public validation(): void{
     this.form = this.fb.group({
@@ -30,8 +37,13 @@ export class EventoDetalheComponent implements OnInit {
       imagemURL: ['', Validators.required],  
     }); 
   }
+
   public resetForm(): void{
     this.form.reset();
   }
-
+  
+  public cssValidator(campoForm: FormControl): any{
+  return {'is-invalid': campoForm.errors && campoForm.touched};
+}
+  
 }
