@@ -7,6 +7,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse'; // Importe o módulo co
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -30,6 +33,9 @@ import { EventoListaComponent } from './componentes/evento-lista/evento-lista.co
 import { LoginComponent } from './componentes/user/login/login.component';
 import { RegistrationComponent } from './componentes/user/registration/registration.component';
 import { UserComponent } from './componentes/user/user.component';
+
+
+defineLocale('pt-br', ptBrLocale);
 @NgModule({
   declarations: [	
     AppComponent,

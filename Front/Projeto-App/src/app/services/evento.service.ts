@@ -23,4 +23,16 @@ constructor(private http:HttpClient) { }
       return this.http.get<Evento>(`${this.baseURL}/${id}`);
   }
 
+  public post(evento: Evento): Observable<Evento> {
+    return this.http.post<Evento>(this.baseURL, evento);
+  }
+
+  public put(id: number, evento: Evento ): Observable<Evento> {
+    return this.http.put<Evento>(`${this.baseURL}/${id}`, evento);
+  }
+
+  public delete(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.baseURL}/${id}`);
+  }
+
 }

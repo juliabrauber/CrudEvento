@@ -54,7 +54,7 @@
             <td class="d-none d-md-table-cell">{{ evento.qtdPessoas }}</td>
             <td class="d-none d-md-table-cell">{{ evento.lotes[0].nome| uppercase}}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-lg" title="Excluir" (click)="openModal(template)">
+                    <button type="button" class="btn btn-danger btn-lg" title="Excluir" (click)="openModal($event, template, evento.id)">
                         <i class="fas fa-trash"></i> <!-- Ícone de lixeira para exclusão -->
                     </button>
                 </td>
@@ -73,7 +73,7 @@
 
 <ng-template #template>
     <div class="modal-body text-center">
-      <p>Tem certeza que quer deletar este Evento?</p>
+      <p>Tem certeza que quer deletar o evento de código {{this.eventoId}} ?</p>
       <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
       <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
     </div>
