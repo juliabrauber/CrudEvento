@@ -15,7 +15,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 export class EventoDetalheComponent implements OnInit {
 
   evento = {} as Evento;
-
+  estadoSalvar: 'post' | 'put' = 'post';
   form: FormGroup = new FormGroup({});
 
   get f(): any{
@@ -41,6 +41,9 @@ export class EventoDetalheComponent implements OnInit {
     const eventoIdParam = this.router.snapshot.paramMap.get('id');
     if(eventoIdParam == null){
       this.spinner.show();
+
+      this.estadoSalvar = 'put';
+
       this.eventoService.getEventoById(Number(eventoIdParam)).subscribe({
         next: ( evento: Evento) => { 
           this.evento = {... evento}
@@ -80,5 +83,25 @@ export class EventoDetalheComponent implements OnInit {
   public cssValidator(campoForm: FormControl): any{
   return {'is-invalid': campoForm.errors && campoForm.touched};
 }
-  
+
+  public salvarAlteracao(): void{
+    this.spinner.show();
+    if(this.form.valid){
+
+      this.evento = (this.estadoSalvar === 'post') 
+      ? {... this.form.value}
+      :{id:this.evento.id, ... this.form.value};
+      
+      this.eventoService[this.estadoSalvar](this.evento).subscribe(
+        () => this.toastr.success('Evento salvo com sucesso!', 'Sucesso'),
+        (error: any) => {
+          console.error(error);
+          this.spinner.hide();
+          this.toastr.error('Erro ao salvar evento.', 'Erro');
+        },
+
+        () => this.spinner.hide()
+      );
+    }  
+  }
 }

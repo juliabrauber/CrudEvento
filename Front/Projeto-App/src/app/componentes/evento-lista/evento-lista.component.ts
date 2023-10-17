@@ -74,7 +74,21 @@ constructor(
   }
   confirm(): void {
     this.modalRef?.hide();
-    this.toastr.success('O Evento foi deletado com sucesso.', 'Deletado!');
+    this.spinner.show();
+
+    this.eventoService.deleteEvento(this.eventoId).subscribe(
+      (result: any) => {
+        console.log(result);
+          this.toastr.success('O Evento foi deletado com sucesso.', 'Deletado!');
+          this.getEventos();
+        },
+
+      (error: any) => { 
+        this.toastr.error(`Error ao tentar deletar o evento ${this.eventoId}`, 'Erro');
+        console.error(error);
+      },
+  ).add(() => this.spinner.hide());
+    
     // Lógica para confirmar a ação (editar/excluir)
   }
   
